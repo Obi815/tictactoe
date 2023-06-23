@@ -21,9 +21,7 @@ body {
     align-items: center;
     grid-template-columns: repeat(3, auto);
 }
-.board.x .cell:hover{
 
-}
 .cell {
     width: var(--cell-size);
     height: var(--cell-size); 
@@ -41,6 +39,16 @@ body {
 .cell.circle {
     cursor: not-allowed;
 }
+.cell.x::before,
+.cell.x::after{
+    background-color: black;   
+}
+
+.board.x .cell:not(.x):not(.circle):hover::before, 
+.board.x .cell:not(.x):not(.circle):hover::after{
+    background-color: lightgray;
+}
+
 .cell:first-child,
 .cell:nth-child(2),
 .cell:nth-child(3) {
@@ -68,7 +76,6 @@ body {
     position: absolute;
     width: calc(var(--mark-size)* .15);
     height: var(--mark-size);
-    background-color: black;
 }
 .cell.x::before,
 .board.x .cell:not(.x):not(.circle):hover::before {
@@ -81,17 +88,21 @@ body {
 
 /* Creating Player O for the game */
 .cell.circle::before,
-.cell.circle::after {
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after {
     content: '';
     position: absolute;
     border-radius: 50%;
 }
-.cell.circle::before {
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before {
     width: var(--mark-size);
     height: var(--mark-size);
     background-color: black;    
 }
-.cell.circle::after {
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after {
     width: calc(var(--mark-size)* .7);
     height: calc(var(--mark-size)* .7);
     background-color: white;    
